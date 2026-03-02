@@ -7,7 +7,7 @@ for extracurricular activities at Mergington High School.
 
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import RedirectResponse
+from fastapi.responses import FileResponse
 import os
 from pathlib import Path
 
@@ -44,7 +44,8 @@ activities = {
 
 @app.get("/")
 def root():
-    return RedirectResponse(url="/static/index.html")
+    index_path = os.path.join(Path(__file__).parent, "static", "index.html")
+    return FileResponse(index_path)
 
 
 @app.get("/activities")
